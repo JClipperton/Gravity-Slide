@@ -1,0 +1,25 @@
+{
+  "name": "COMP397-PhaserBoilerPlate",
+  "homepage": "https://github.com/CentennialCollege/COMP397-PhaserBoilerPlate",
+  "authors": [
+    "Tom Tsiliopoulos <tsiliopoulos@hotmail.com>"
+  ],
+  "description": "Phaser BoilerPlate for COMP397 @ Centennial College",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Scripts/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser": "~2.4.4",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "pixi.js": "pixi#~3.0.8"
+  }
+}

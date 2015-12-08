@@ -1,0 +1,10 @@
+/* custom css for our game */
+body {
+	background-color: dimgray;	
+}
+
+canvas {
+	border: 2px solid white;
+	border-radius: 15px;
+	margin: 1% 0 0 10%;
+}
