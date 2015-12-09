@@ -31,6 +31,7 @@ module objects {
 			
 			// enable physics
 			this.game.physics.enable(this, Phaser.Physics.ARCADE);
+			this.game.physics.arcade.enableBody(this);
 			this.body.collideWorldBounds = true;
 			this.body.gravity.y = this._gravity;
 			this.body.bounce.y = this._bounce;
@@ -70,7 +71,7 @@ module objects {
 				this._playerState = PlayerState.IDLE;
 			}    
 			//  Allow the player to jump if they are touching the ground
-			if (this._input.down.isDown && this.body.touching.up) {
+			if (this._input.up.isDown && this.body.touching.down) {
 				this.body.velocity.y = 350;
 				this._playerState = PlayerState.JUMPING;
 			}

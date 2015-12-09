@@ -30,14 +30,14 @@ module scenes {
 			this.add.existing(this._platform);
 			
 			// add player
-			this._player = new objects.Player(this.game, 400, 300, 'dude', 0.2, 300);
+			this._player = new objects.Player(this.game, 400, 50, 'dude', 0.2, 300);
 			this.add.existing(this._player);
 			
 		}
 
 		update(): void {
 			// console.log(this._player.body);
-			// this._updateGravity();
+			// this._updatePlayerGravity();
 			this.game.physics.arcade.collide(this._player, this._platform);
 		}
 
@@ -51,7 +51,7 @@ module scenes {
 		}
 		
 		/** Change characters gravity on the y-axis based on position */
-		private _updateGravity() : void {
+		private _updatePlayerGravity() : void {
 			if (this._player.y > this.game.height / 2) {
 				this._player.body.gravity.y =  -this._player.y;
 				console.log(this._player.body.gravity.y);

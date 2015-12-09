@@ -1,7 +1,7 @@
 module scenes {
 	export class Title extends Phaser.State {
 		// Instance Variables
-		public game: Phaser.Game; // required in each scene
+		public game: Phaser.Game;
 		
 		private _preloadBar: Phaser.Sprite;
 		private _titleScreenImage: Phaser.Sprite;
@@ -41,6 +41,7 @@ module scenes {
 			this.input.onTap.addOnce(this._titleClicked,this);
 		}
 		
+		// loads next state on click
 		private _titleClicked(): void {
 			this.game.state.start("Play");
 		}

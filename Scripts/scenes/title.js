@@ -35,6 +35,7 @@ var scenes;
             tween.onComplete.add(this._loadLogo, this); // load logo on complete					
             this.input.onTap.addOnce(this._titleClicked, this);
         };
+        // loads next state on click
         Title.prototype._titleClicked = function () {
             this.game.state.start("Play");
         };

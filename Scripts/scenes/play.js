@@ -23,12 +23,12 @@ var scenes;
             this._platform = new objects.Platform(this.game, 400, 450, 400, 'platform', 5);
             this.add.existing(this._platform);
             // add player
-            this._player = new objects.Player(this.game, 400, 300, 'dude', 0.2, 300);
+            this._player = new objects.Player(this.game, 400, 50, 'dude', 0.2, 300);
             this.add.existing(this._player);
         };
         Play.prototype.update = function () {
             // console.log(this._player.body);
-            // this._updateGravity();
+            // this._updatePlayerGravity();
             this.game.physics.arcade.collide(this._player, this._platform);
         };
         Play.prototype.render = function () {
@@ -38,7 +38,7 @@ var scenes;
             this.game.state.start("Over");
         };
         /** Change characters gravity on the y-axis based on position */
-        Play.prototype._updateGravity = function () {
+        Play.prototype._updatePlayerGravity = function () {
             if (this._player.y > this.game.height / 2) {
                 this._player.body.gravity.y = -this._player.y;
                 console.log(this._player.body.gravity.y);

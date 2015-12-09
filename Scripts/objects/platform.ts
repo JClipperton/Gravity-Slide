@@ -11,6 +11,10 @@ module objects {
 			
 			this.height = 25;
 			this.width = width;
+			
+			// enable physics
+			this.game.physics.enable(this, Phaser.Physics.ARCADE);
+			// this.game.physics.arcade.enableBody(this);
 		}
 		
 		/**
@@ -21,6 +25,8 @@ module objects {
 			this.x -= this._speed;
 			if (this.x < 0 - this.width) {
 				this.x = 800;
+				this.y = (Math.random() * 600) + 1;
+				console.log(this.y);
 			}
 		}	
 		

@@ -2,7 +2,7 @@
 module Game {
     export class GravitySlide {
         // Instance Variables
-        public game: Phaser.Game;
+        public game: Phaser.Game; // required in each scene for common references
 
         constructor() {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', {
@@ -19,18 +19,32 @@ module Game {
             // game settings
             this.game.input.maxPointers = 1; // increase for multi-touch support
             this.game.stage.disableVisibilityChange = true; // pause the game on loss of focus
+            this.game.scale.pageAlignHorizontally = true;
             
-            /*
             if (this.game.device.desktop) {
-                //  If you have any desktop specific settings, they can go in here                                               
+                //  Any desktop targeted settings go here
+                // set scaling
+                this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;  // default to NO_SCALE, SHOW_ALL is also good on some screens 
+                this.game.scale.minWidth = 640;
+                this.game.scale.minHeight = 480;
+                this.game.scale.maxWidth = 1600;
+                this.game.scale.maxHeight = 1200;                                                       
             }
             else {
-                //  Same goes for mobile settings.
+                //  Any mobile targeted settings go here
+                // set scaling
+                this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+                this.game.scale.minWidth = 480;
+                this.game.scale.minHeight = 260;
+                this.game.scale.maxWidth = 1024;
+                this.game.scale.maxHeight = 768;
+                this.game.scale.forceLandscape = true;
+                this.game.scale.refresh();
             }
-            */
+            
             
             // set scaling
-            this.game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE; // default to NO_SCALE, SHOW_ALL is also good on some screens
+
             
             // load game states
             this.game.state.add("Title", scenes.Title, true);
