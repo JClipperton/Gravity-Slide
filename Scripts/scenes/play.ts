@@ -2,6 +2,8 @@ module scenes {
 	export class Play extends Phaser.State {
 		// Instance Variables
 		public game: Phaser.Game;
+		
+		private _bg: Phaser.Image;
 
 		private _gameOverButton: Phaser.Button;
 		
@@ -16,8 +18,8 @@ module scenes {
 			// start the physics engine
 			this.game.physics.startSystem(Phaser.Physics.ARCADE);
 			
-			// debug text
-			var style = { font: "30px Arial", fill: "#ff0000", align: "center" };
+			this._bg = new Phaser.Image(this.game, 0, 0, 'sky');
+			this.add.existing(this._bg);
 			
 			// debug button to game over screen
 			this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
@@ -25,14 +27,12 @@ module scenes {
 			
 			// add player
 			this._player = new objects.Player(this.game, 400, 300, 'dude', 0.2, 300);
+			this.add.existing(this._player);
 			
-			// physics set up
-			
-			this._player.body.collideWorldBounds = true;
 		}
 
 		update(): void {
-			console.log(this._player.position.y);
+			// console.log(this._player.body);
 		}
 
 		render(): void {

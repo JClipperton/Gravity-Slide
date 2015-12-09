@@ -14,18 +14,17 @@ var scenes;
         Play.prototype.create = function () {
             // start the physics engine
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            // debug text
-            var style = { font: "30px Arial", fill: "#ff0000", align: "center" };
+            this._bg = new Phaser.Image(this.game, 0, 0, 'sky');
+            this.add.existing(this._bg);
             // debug button to game over screen
             this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
             this._gameOverButton.anchor.setTo(0.5);
             // add player
             this._player = new objects.Player(this.game, 400, 300, 'dude', 0.2, 300);
-            // physics set up
-            this._player.body.collideWorldBounds = true;
+            this.add.existing(this._player);
         };
         Play.prototype.update = function () {
-            console.log(this._player.position.y);
+            // console.log(this._player.body);
         };
         Play.prototype.render = function () {
         };
