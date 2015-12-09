@@ -46,8 +46,6 @@ module objects {
 		public update(): void {
 			// update inputs
 			this._updateInputs();
-			
-			// update gravity
 		}
 		
 		/**

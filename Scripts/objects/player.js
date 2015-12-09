@@ -48,7 +48,6 @@ var objects;
         Player.prototype.update = function () {
             // update inputs
             this._updateInputs();
-            // update gravity
         };
         /**
          * method for moving the player

@@ -33,6 +33,7 @@ module scenes {
 
 		update(): void {
 			// console.log(this._player.body);
+			this._updateGravity();
 		}
 
 		render(): void {
@@ -42,6 +43,17 @@ module scenes {
 		// PRIVATE METHODS
 		private _gameOverButton_Clicked(): void {
 			this.game.state.start("Over");
+		}
+		
+		/** Change characters gravity on the y-axis based on position */
+		private _updateGravity() : void {
+			if (this._player.y > this.game.height / 2) {
+				this._player.body.gravity.y =  -this._player.y;
+				console.log(this._player.body.gravity.y);
+			} else {
+				this._player.body.gravity.y = -this._player.y + 600;
+				console.log(this._player.body.gravity.y);
+			}
 		}
 	}
 }

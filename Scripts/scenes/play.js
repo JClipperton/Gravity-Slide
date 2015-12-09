@@ -25,12 +25,24 @@ var scenes;
         };
         Play.prototype.update = function () {
             // console.log(this._player.body);
+            this._updateGravity();
         };
         Play.prototype.render = function () {
         };
         // PRIVATE METHODS
         Play.prototype._gameOverButton_Clicked = function () {
             this.game.state.start("Over");
+        };
+        /** Change characters gravity on the y-axis based on position */
+        Play.prototype._updateGravity = function () {
+            if (this._player.y > this.game.height / 2) {
+                this._player.body.gravity.y = -this._player.y;
+                console.log(this._player.body.gravity.y);
+            }
+            else {
+                this._player.body.gravity.y = -this._player.y + 600;
+                console.log(this._player.body.gravity.y);
+            }
         };
         return Play;
     })(Phaser.State);
