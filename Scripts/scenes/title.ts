@@ -1,7 +1,7 @@
 module scenes {
 	export class Title extends Phaser.State {
 		// Instance Variables
-		public game: Phaser.Game;
+		public game: Phaser.Game; // required in each scene
 		
 		private _titleScreenImage: Phaser.Sprite;
 		

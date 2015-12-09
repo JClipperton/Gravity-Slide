@@ -12,17 +12,22 @@ var scenes;
             _super.call(this);
         }
         Play.prototype.create = function () {
-            var style = { font: "65px Arial", fill: "#ff0000", align: "center" };
-            this._textValue = this.game.add.text(0, 0, "0", style);
-            this._updateCount = 0;
-            this._gameOverButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'firstaid', this._gameOverButton_Clicked);
+            // start the physics engine
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
+            // debug text
+            var style = { font: "30px Arial", fill: "#ff0000", align: "center" };
+            // debug button to game over screen
+            this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
             this._gameOverButton.anchor.setTo(0.5);
+            // add player
+            this._player = new objects.Player(this.game, 400, 300, 'dude', 0.2, 300);
+            // physics set up
+            this._player.body.collideWorldBounds = true;
         };
         Play.prototype.update = function () {
-            this._textValue.text = ("Frames Updated: " + this._updateCount++).toString();
+            console.log(this._player.position.y);
         };
         Play.prototype.render = function () {
-            this.game.debug.text("This is drawn in the render method", 0, 80);
         };
         // PRIVATE METHODS
         Play.prototype._gameOverButton_Clicked = function () {
