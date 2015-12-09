@@ -6,7 +6,7 @@ module scenes {
 		private _bg: Phaser.Image;
 
 		private _gameOverButton: Phaser.Button;
-		
+		private _platform: objects.Platform;
 		private _player: objects.Player;
 		
 		// CONSTRUCTOR ++++++++++++++++++++++++++
@@ -25,6 +25,10 @@ module scenes {
 			this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
 			this._gameOverButton.anchor.setTo(0.5);
 			
+			// add platform
+			this._platform = new objects.Platform(this.game, 400, 450, 400, 'platform', 5);
+			this.add.existing(this._platform);
+			
 			// add player
 			this._player = new objects.Player(this.game, 400, 300, 'dude', 0.2, 300);
 			this.add.existing(this._player);
@@ -33,7 +37,8 @@ module scenes {
 
 		update(): void {
 			// console.log(this._player.body);
-			this._updateGravity();
+			// this._updateGravity();
+			this.game.physics.arcade.collide(this._player, this._platform);
 		}
 
 		render(): void {

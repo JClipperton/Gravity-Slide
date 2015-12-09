@@ -8,6 +8,7 @@ module objects {
 		private _input: Phaser.CursorKeys;
 		private _playerState: PlayerState;
 		
+		// SETTERS/GETTERS
 		set Gravity(newGrav: number) {
 			this._gravity = newGrav;
 		}

@@ -36,6 +36,7 @@ var objects;
             get: function () {
                 return this._gravity;
             },
+            // SETTERS/GETTERS
             set: function (newGrav) {
                 this._gravity = newGrav;
             },

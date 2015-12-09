@@ -9,27 +9,26 @@ var Game;
         }
         // load all game assets
         GravitySlide.prototype.preload = function () {
-            // graphics go here
-            this.game.load.image('logo', '../Assets/images/Phaser-Logo-Small.png');
-            this.game.load.image('sky', '../Assets/images/sky.png');
-            this.game.load.image('platform', '../Assets/images/platform.png');
-            this.game.load.image('platform2', '../Assets/images/platform2.png');
-            this.game.load.image('star', '../Assets/images/star.png');
-            this.game.load.image('gem', '../Assets/images/diamond.png');
-            this.game.load.image('firstaid', '../Assets/images/firstaid.png');
-            // spritesheets go here
-            this.game.load.spritesheet('dude', '../Assets/images/dude.png', 32, 48);
-            this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
-            // audio goes here
-            this.game.load.audio('gameover', '../Assets/audio/badEnd.wav');
+            this.game.load.image('preload-bar', '../Assets/images/loader.png');
         };
         GravitySlide.prototype.create = function () {
+            // game settings
+            this.game.input.maxPointers = 1; // increase for multi-touch support
+            this.game.stage.disableVisibilityChange = true; // pause the game on loss of focus
+            /*
+            if (this.game.device.desktop) {
+                //  If you have any desktop specific settings, they can go in here
+            }
+            else {
+                //  Same goes for mobile settings.
+            }
+            */
+            // set scaling
+            this.game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE; // default to NO_SCALE, SHOW_ALL is also good on some screens
             // load game states
             this.game.state.add("Title", scenes.Title, true);
             this.game.state.add("Play", scenes.Play, false);
             this.game.state.add("Over", scenes.Over, false);
-            // set scaling
-            this.game.scale.scaleMode = Phaser.ScaleManager.NO_SCALE; // default to NO_SCALE, SHOW_ALL is also good on some screens
         };
         return GravitySlide;
     })();
