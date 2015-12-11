@@ -51,6 +51,11 @@ var objects;
             // update inputs
             this._updateInputs();
         };
+        // PUBLIC METHODS
+        Player.prototype.flipSpriteY = function () {
+            (this.y > this.game.height / 2) ? this.scale.y = -1 : this.scale.y = 1;
+        };
+        // PRIVATE METHODS +++++++++++++++++++
         /**
          * method for moving the player
          */

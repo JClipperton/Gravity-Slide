@@ -50,6 +50,12 @@ module objects {
 			this._updateInputs();
 		}
 		
+		// PUBLIC METHODS
+		public flipSpriteY(): void {
+			(this.y > this.game.height / 2) ? this.scale.y = -1: this.scale.y = 1;		
+		}
+		
+		// PRIVATE METHODS +++++++++++++++++++
 		/**
 		 * method for moving the player
 		 */
@@ -76,6 +82,6 @@ module objects {
 				this._playerState = PlayerState.JUMPING;
 				console.log("JUMPED UP!");
 			}
-		}
+		}	
 	}
 }

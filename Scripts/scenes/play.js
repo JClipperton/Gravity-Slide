@@ -53,12 +53,12 @@ var scenes;
             if (this._player.y > this.game.height / 2) {
                 //player is below center line
                 this._player.body.gravity.y = -this._player.y;
-                this._player.scale.y = -1;
+                this._player.flipSpriteY();
             }
             else {
                 // player is above center line
                 this._player.body.gravity.y = -this._player.y + 600;
-                this._player.scale.y = 1;
+                this._player.flipSpriteY();
             }
         };
         return Play;
