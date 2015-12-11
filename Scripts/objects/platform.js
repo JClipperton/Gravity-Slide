@@ -16,7 +16,7 @@ var objects;
             this.width = width;
             // enable physics
             this.game.physics.enable(this, Phaser.Physics.ARCADE);
-            // this.game.physics.arcade.enableBody(this);
+            this.body.immovable = true;
         }
         /**
          * Update Method for Platform Class
@@ -27,7 +27,6 @@ var objects;
             if (this.x < 0 - this.width) {
                 this.x = 800;
                 this.y = (Math.random() * 600) + 1;
-                console.log(this.y);
             }
         };
         return Platform;

@@ -72,8 +72,9 @@ module objects {
 			}    
 			//  Allow the player to jump if they are touching the ground
 			if (this._input.up.isDown && this.body.touching.down) {
-				this.body.velocity.y = 350;
+				this.body.velocity.y = -this.body.gravity.y;
 				this._playerState = PlayerState.JUMPING;
+				console.log("JUMPED UP!");
 			}
 		}
 	}
