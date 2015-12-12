@@ -42,10 +42,6 @@ module Game {
                 this.game.scale.refresh();
             }
             
-            
-            // set scaling
-
-            
             // load game states
             this.game.state.add("Title", scenes.Title, true);
             this.game.state.add("Play", scenes.Play, false);

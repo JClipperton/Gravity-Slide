@@ -32,6 +32,7 @@ module scenes {
             
             // audio goes here
             this.game.load.audio('gameover', '../Assets/audio/badEnd.wav');
+			this.game.load.audio('jump', '../Assets/audio/player_jump.wav');
         }
 		
 		create(): void {

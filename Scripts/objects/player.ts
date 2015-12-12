@@ -8,6 +8,8 @@ module objects {
 		private _input: Phaser.CursorKeys;
 		private _playerState: PlayerState;
 		
+		private _jumpSound: Phaser.Sound;
+		
 		// SETTERS/GETTERS
 		set Gravity(newGrav: number) {
 			this._gravity = newGrav;
@@ -40,6 +42,9 @@ module objects {
 			this.animations.add('left', [0, 1, 2, 3], 10, true);
 			this.animations.add('idle', [4], 10, true);
     		this.animations.add('right', [5, 6, 7, 8], 10, true);
+			
+			// assign player sounds
+			this._jumpSound = new Phaser.Sound(this.game, 'jump');
 		}
 		
 		/** 
@@ -55,10 +60,15 @@ module objects {
 			(this.y > this.game.height / 2) ? this.scale.y = -1: this.scale.y = 1;		
 		}
 		
-		// PRIVATE METHODS +++++++++++++++++++
-		/**
-		 * method for moving the player
-		 */
+		// PRIVATE METHODS +++++++++++++++++++	
+		/** method to make the player jump */
+		private _jump(): void {
+			this.body.velocity.y = -this.body.gravity.y;
+			this._playerState = PlayerState.JUMPING;
+			this._jumpSound.play();
+		}
+		
+		/** method for moving the player */
 		private _updateInputs(): void {
 			this.body.velocity.x = 0;
 			if (this._input.left.isDown) {
@@ -77,11 +87,12 @@ module objects {
 				this._playerState = PlayerState.IDLE;
 			}    
 			//  Allow the player to jump if they are touching the ground
-			if (this._input.up.isDown && this.body.touching.down) {
-				this.body.velocity.y = -this.body.gravity.y;
-				this._playerState = PlayerState.JUMPING;
-				console.log("JUMPED UP!");
+			if ((this._input.up.isDown) && (this.body.touching.down) && (this.y < this.game.height * 0.5)) {
+				this._jump();				
 			}
+			if ((this._input.down.isDown) && (this.body.touching.up) && (this.y > this.game.height * 0.5)) {
+				this._jump();
+			}		
 		}	
 	}
 }

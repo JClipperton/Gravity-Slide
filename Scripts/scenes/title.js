@@ -29,6 +29,7 @@ var scenes;
             this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
             // audio goes here
             this.game.load.audio('gameover', '../Assets/audio/badEnd.wav');
+            this.game.load.audio('jump', '../Assets/audio/player_jump.wav');
         };
         Title.prototype.create = function () {
             var tween = this.add.tween(this._preloadBar).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
