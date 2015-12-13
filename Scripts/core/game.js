@@ -1,7 +1,9 @@
 /// <reference path = "_reference.ts"/>
 var Game;
 (function (Game) {
+    // GRAVITY SLIDE CLASS 
     var GravitySlide = (function () {
+        // CONSTRUCTOR ++++++++++++++++++++++++++
         function GravitySlide() {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', {
                 create: this.create, preload: this.preload
@@ -17,7 +19,7 @@ var Game;
             this.game.stage.disableVisibilityChange = true; // pause the game on loss of focus
             this.game.scale.pageAlignHorizontally = true;
             if (this.game.device.desktop) {
-                //  Any desktop targeted settings go here
+                // Any desktop targeted settings go here
                 // set scaling
                 this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE; // default to NO_SCALE, SHOW_ALL is also good on some screens 
                 this.game.scale.minWidth = 640;
@@ -26,7 +28,7 @@ var Game;
                 this.game.scale.maxHeight = 1200;
             }
             else {
-                //  Any mobile targeted settings go here
+                // Any mobile targeted settings go here
                 // set scaling
                 this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.game.scale.minWidth = 480;

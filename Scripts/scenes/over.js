@@ -5,15 +5,17 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var scenes;
 (function (scenes) {
+    // OVER CLASS (state 3)
     var Over = (function (_super) {
         __extends(Over, _super);
+        // CONSTRUCTOR ++++++++++++++++++++++++++
         function Over() {
             _super.call(this);
         }
         Over.prototype.create = function () {
             // play game over sound
             this._gameOverSound = this.game.add.audio('gameover');
-            this._gameOverSound.play();
+            this._gameOverSound.play(); // play sound on load
             // add background
             this._bg = new Phaser.Image(this.game, 0, 0, 'sky');
             this.add.existing(this._bg);
@@ -29,6 +31,7 @@ var scenes;
             this._resetGameButton.anchor.setTo(0.5);
         };
         // PRIVATE METHODS
+        /** DEBUG-TEMP ---> sets game to title state */
         Over.prototype._resetGameButton_Clicked = function () {
             this.game.state.start("Title");
         };

@@ -1,9 +1,11 @@
 /// <reference path = "_reference.ts"/>
 module Game {
+    // GRAVITY SLIDE CLASS 
     export class GravitySlide {
         // Instance Variables
         public game: Phaser.Game; // required in each scene for common references
-
+        
+        // CONSTRUCTOR ++++++++++++++++++++++++++
         constructor() {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', {
                 create: this.create, preload: this.preload
@@ -22,7 +24,7 @@ module Game {
             this.game.scale.pageAlignHorizontally = true;
             
             if (this.game.device.desktop) {
-                //  Any desktop targeted settings go here
+                // Any desktop targeted settings go here
                 // set scaling
                 this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;  // default to NO_SCALE, SHOW_ALL is also good on some screens 
                 this.game.scale.minWidth = 640;
@@ -31,7 +33,7 @@ module Game {
                 this.game.scale.maxHeight = 1200;                                                       
             }
             else {
-                //  Any mobile targeted settings go here
+                // Any mobile targeted settings go here
                 // set scaling
                 this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.game.scale.minWidth = 480;

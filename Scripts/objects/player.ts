@@ -57,7 +57,7 @@ module objects {
 		
 		// PUBLIC METHODS
 		public flipSpriteY(): void {
-			(this.y > this.game.height / 2) ? this.scale.y = -1 : this.scale.y = 1;
+			(this.y > this.game.height * 0.5) ? this.scale.y = -1 : this.scale.y = 1;
 		}
 		
 		// PRIVATE METHODS +++++++++++++++++++	

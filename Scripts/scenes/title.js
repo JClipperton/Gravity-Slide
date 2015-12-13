@@ -5,13 +5,14 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var scenes;
 (function (scenes) {
+    // TITLE CLASS (state 1)
     var Title = (function (_super) {
         __extends(Title, _super);
         // CONSTRUCTOR ++++++++++++++++++++++++++
         function Title() {
             _super.call(this);
         }
-        // load all game assets
+        /** preloads all game assets */
         Title.prototype.preload = function () {
             // set up preloader image
             this._preloadBar = this.add.sprite(200, 500, 'preload-bar');
@@ -20,7 +21,6 @@ var scenes;
             this.game.load.image('logo', '../Assets/images/Phaser-Logo-Small.png');
             this.game.load.image('sky', '../Assets/images/sky.png');
             this.game.load.image('platform', '../Assets/images/platform.png');
-            this.game.load.image('platform2', '../Assets/images/platform2.png');
             this.game.load.image('star', '../Assets/images/star.png');
             this.game.load.image('gem', '../Assets/images/diamond.png');
             this.game.load.image('firstaid', '../Assets/images/firstaid.png');
@@ -28,6 +28,9 @@ var scenes;
             this.game.load.image('bgMiddle', '../Assets/images/background_middle.png');
             this.game.load.image('bgFront', '../Assets/images/background_front.png');
             // spritesheets go here
+            // ('asset key', 'url', width of each frame, height ditto, ?num of frames, ?margin btw frames, ?space btw frames)
+            this.game.load.spritesheet('platformAnimGreen', '../Assets/images/platform_lit_spritesheet.png', 84, 11, 5);
+            this.game.load.spritesheet('platformAnimBlue', '../Assets/images/platform_litblue_spritesheet.png', 84, 11, 5);
             this.game.load.spritesheet('dude', '../Assets/images/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
             // audio goes here
@@ -39,10 +42,12 @@ var scenes;
             tween.onComplete.add(this._loadLogo, this); // load logo on complete					
             this.input.onTap.addOnce(this._titleClicked, this);
         };
-        // loads next state on click
+        // PRIVATE METHODS
+        /** loads next state on click */
         Title.prototype._titleClicked = function () {
             this.game.state.start("Play");
         };
+        /** adds logo to screen and animates it */
         Title.prototype._loadLogo = function () {
             // add logo
             this._titleScreenImage = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');

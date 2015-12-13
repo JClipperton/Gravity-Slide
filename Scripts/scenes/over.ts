@@ -1,13 +1,16 @@
 module scenes {
+	// OVER CLASS (state 3)
 	export class Over extends Phaser.State {
-		// Instance Variables
+		// PUBLIC INSTANCE VARIABLES
 		public game: Phaser.Game;
 		
+		// PRIVATE INSTANCE VARIABLES
 		private _gameOverSound: Phaser.Sound;
 		private _bg: Phaser.Image;
 		private _gameOverText: Phaser.Text;
 		private _resetGameButton: Phaser.Button;
 		
+		// CONSTRUCTOR ++++++++++++++++++++++++++
 		constructor() {
 			super();
 		}
@@ -15,7 +18,8 @@ module scenes {
 		create(): void {
 			// play game over sound
 			this._gameOverSound = this.game.add.audio('gameover');
-			this._gameOverSound.play();
+			this._gameOverSound.play(); // play sound on load
+			
 			// add background
 			this._bg = new Phaser.Image(this.game, 0, 0, 'sky');
 			this.add.existing(this._bg);
@@ -36,6 +40,7 @@ module scenes {
 		}
 		
 		// PRIVATE METHODS
+		/** DEBUG-TEMP ---> sets game to title state */
 		private _resetGameButton_Clicked():void {
 			this.game.state.start("Title");
 		}

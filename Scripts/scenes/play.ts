@@ -1,8 +1,10 @@
 module scenes {
+	// PLAY CLASS (state 2)
 	export class Play extends Phaser.State {
-		// Instance Variables
+		// PUBLIC INSTANCE VARIABLES
 		public game: Phaser.Game;
 		
+		// PRIVATE INSTANCE VARIABLES
 		private _background1: objects.ParallaxBackground;
 		private _background2: objects.ParallaxBackground;	
 		private _gameOverButton: Phaser.Button;
@@ -25,7 +27,7 @@ module scenes {
 			this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', 5);
 			this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', 5);
 			
-			// TODO: remove ==> debug button to game over screen
+			// TODO: remove ---> debug button to game over screen
 			this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
 			this._gameOverButton.anchor.setTo(0.5);			
 			
@@ -34,7 +36,7 @@ module scenes {
 				var tempWidth: number = 400;
 				var tempY: number = (platform * 100) + 100;
 				var tempX: number = (platform * tempWidth);
-				var tempPlatform: objects.Platform = new objects.Platform(this.game, tempX, tempY, tempWidth, 'platform', 5);
+				var tempPlatform: objects.Platform = new objects.Platform(this.game, tempX, tempY, tempWidth, 'platformAnimGreen', 5);
 				this._platforms.push(tempPlatform);
 				
 				this.add.existing(tempPlatform);
@@ -47,9 +49,11 @@ module scenes {
 		}
 
 		update(): void {
+			// scroll background
 			this._background1.update();
 			this._background2.update();
 			
+			// update physics
 			this._updatePlayerGravity();
 			for (var i = 0; i < this._numberOfPlatforms; i++) {
 				this.game.physics.arcade.collide(this._player, this._platforms[i]);
@@ -60,11 +64,7 @@ module scenes {
 			
 		}
 		
-		// PRIVATE METHODS
-		private _gameOverButton_Clicked(): void {
-			this.game.state.start("Over");
-		}
-		
+		// PRIVATE METHODS		
 		/** Change characters gravity on the y-axis based on position */
 		private _updatePlayerGravity() : void {
 			if (this._player.y > this.game.height / 2) {
@@ -77,5 +77,10 @@ module scenes {
 				this._player.flipSpriteY();
 			}
 		}
+		
+		/** DEBUG-TEMP ---> sets game to over state */
+		private _gameOverButton_Clicked(): void {
+			this.game.state.start("Over");
+		}		
 	}
 }
