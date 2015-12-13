@@ -16,13 +16,13 @@ var scenes;
         Play.prototype.create = function () {
             // start the physics engine
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            // TODO: replace background with scrolling background
-            this._bg = new Phaser.Image(this.game, 0, 0, 'sky');
-            this.add.existing(this._bg);
+            // ADD OBJECTS
+            // add scrolling background
+            this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', 5);
+            this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', 5);
             // TODO: remove ==> debug button to game over screen
             this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
             this._gameOverButton.anchor.setTo(0.5);
-            // ADD OBJECTS
             // add platforms			
             for (var platform = 0; platform < 5; platform++) {
                 var tempWidth = 400;
@@ -37,6 +37,8 @@ var scenes;
             this.add.existing(this._player);
         };
         Play.prototype.update = function () {
+            this._background1.update();
+            this._background2.update();
             this._updatePlayerGravity();
             for (var i = 0; i < this._numberOfPlatforms; i++) {
                 this.game.physics.arcade.collide(this._player, this._platforms[i]);

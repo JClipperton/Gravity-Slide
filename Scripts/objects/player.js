@@ -84,12 +84,14 @@ var objects;
                 this.animations.play('idle');
                 this._playerState = PlayerState.IDLE;
             }
-            //  Allow the player to jump if they are touching the ground
-            if ((this._input.up.isDown) && (this.body.touching.down) && (this.y < this.game.height * 0.5)) {
-                this._jump();
-            }
-            if ((this._input.down.isDown) && (this.body.touching.up) && (this.y > this.game.height * 0.5)) {
-                this._jump();
+            //  Allow the player to jump if they are touching the ground and not already jumping
+            if (this._playerState != PlayerState.JUMPING) {
+                if ((this._input.up.isDown) && (this.body.touching.down) && (this.y < this.game.height * 0.5)) {
+                    this._jump();
+                }
+                if ((this._input.down.isDown) && (this.body.touching.up) && (this.y > this.game.height * 0.5)) {
+                    this._jump();
+                }
             }
         };
         return Player;

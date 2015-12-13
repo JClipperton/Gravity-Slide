@@ -24,6 +24,9 @@ var scenes;
             this.game.load.image('star', '../Assets/images/star.png');
             this.game.load.image('gem', '../Assets/images/diamond.png');
             this.game.load.image('firstaid', '../Assets/images/firstaid.png');
+            this.game.load.image('bgBack', '../Assets/images/background_back.png');
+            this.game.load.image('bgMiddle', '../Assets/images/background_middle.png');
+            this.game.load.image('bgFront', '../Assets/images/background_front.png');
             // spritesheets go here
             this.game.load.spritesheet('dude', '../Assets/images/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
