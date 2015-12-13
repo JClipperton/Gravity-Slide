@@ -46,9 +46,7 @@ var objects;
             enumerable: true,
             configurable: true
         });
-        /**
-         * Update Method for Player Class
-        */
+        /** Update Method for Player Class */
         Player.prototype.update = function () {
             // update inputs
             this._updateInputs();

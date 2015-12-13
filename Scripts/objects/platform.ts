@@ -19,9 +19,7 @@ module objects {
 			this.body.immovable = true;
 		}
 		
-		/**
-		 * Update Method for Platform Class
-		 */
+		/** Update Method for Platform Class */
 		public update(): void {
 			// moves platform left
 			this.x -= this._speed;
@@ -32,8 +30,9 @@ module objects {
 			}
 		}
 		
-		private _changeSprite(localY: number): void {
-			
+		// PRIVATE METHODS ++++++++++++++++++++++++++++++
+		/** Changes sprite based on Y position */
+		private _changeSprite(localY: number): void {			
 			if (localY <= (this.game.height * 0.5)) {
 				this.loadTexture('platformAnimGreen');
 				console.log(localY + ": above the center, " + this.key);

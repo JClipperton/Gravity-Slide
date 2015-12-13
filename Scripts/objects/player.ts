@@ -47,9 +47,7 @@ module objects {
 			this._jumpSound = new Phaser.Sound(this.game, 'jump');
 		}
 		
-		/** 
-		 * Update Method for Player Class
-		*/
+		/** Update Method for Player Class */
 		public update(): void {
 			// update inputs
 			this._updateInputs();

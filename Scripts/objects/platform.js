@@ -19,9 +19,7 @@ var objects;
             this.game.physics.enable(this, Phaser.Physics.ARCADE);
             this.body.immovable = true;
         }
-        /**
-         * Update Method for Platform Class
-         */
+        /** Update Method for Platform Class */
         Platform.prototype.update = function () {
             // moves platform left
             this.x -= this._speed;
@@ -31,6 +29,8 @@ var objects;
                 this._changeSprite(this.y);
             }
         };
+        // PRIVATE METHODS ++++++++++++++++++++++++++++++
+        /** Changes sprite based on Y position */
         Platform.prototype._changeSprite = function (localY) {
             if (localY <= (this.game.height * 0.5)) {
                 this.loadTexture('platformAnimGreen');
