@@ -39,9 +39,13 @@ module objects {
 			this.body.bounce.y = this._bounce;
 			
 			// assign player animations
+			/*
 			this.animations.add('left', [0, 1, 2, 3], 10, true);
 			this.animations.add('idle', [4], 10, true);
 			this.animations.add('right', [5, 6, 7, 8], 10, true);
+			*/
+			this.animations.add('run', [0,1,2,3,4,5,6,7,8,9], 15, true);
+			
 			
 			// assign player sounds
 			this._jumpSound = new Phaser.Sound(this.game, 'jump');
@@ -72,16 +76,16 @@ module objects {
 			if (this._input.left.isDown) {
 				//  Move to the left
 				this.body.velocity.x = -150;
-				this.animations.play('left');
+				this.scale.x = -1;
 				this._playerState = PlayerState.RUNNING;
 			} else if (this._input.right.isDown) {
 				//  Move to the right
 				this.body.velocity.x = 150;
-				this.animations.play('right');
+				this.scale.x = 1;
 				this._playerState = PlayerState.RUNNING;
 			} else {
 				//  Stand still
-				this.animations.play('idle');
+				this.animations.play('run');
 				this._playerState = PlayerState.IDLE;
 			}    
 			//  Allow the player to jump if they are touching the ground and not already jumping

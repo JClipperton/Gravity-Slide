@@ -22,9 +22,6 @@ module scenes {
             // graphics go here
             this.game.load.image('logo', '../Assets/images/Phaser-Logo-Small.png');
             this.game.load.image('sky', '../Assets/images/sky.png');
-            this.game.load.image('platform', '../Assets/images/platform.png');
-			this.game.load.image('star', '../Assets/images/star.png');
-			this.game.load.image('gem', '../Assets/images/diamond.png');
 			this.game.load.image('firstaid', '../Assets/images/firstaid.png');
 			this.game.load.image('bgBack', '../Assets/images/background_back.png');
 			this.game.load.image('bgMiddle', '../Assets/images/background_middle.png');
@@ -36,8 +33,10 @@ module scenes {
 			this.game.load.spritesheet('platformAnimBlue', '../Assets/images/platform_litblue_spritesheet.png', 84, 11, 5);
 			this.game.load.spritesheet('pickupBlue', '../Assets/images/crystal_32_blue.png', 32, 32, 8);
 			this.game.load.spritesheet('pickupGrey', '../Assets/images/crystal_32_grey.png', 32, 32, 8);
-            this.game.load.spritesheet('dude', '../Assets/images/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
+			
+			// sprite atlas go here
+			this.game.load.atlas('player', '../Assets/images/xeon_player.png', '../Assets/images/xeon_player.json')
             
             // audio goes here
             this.game.load.audio('gameover', '../Assets/audio/badEnd.wav');

@@ -26,8 +26,8 @@ module scenes {
 			
 			// ADD OBJECTS
 			// add scrolling background
-			this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', (this._levelSpeed * 0.96));
-			this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', (this._levelSpeed * 0.96));
+			this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', this._levelSpeed);
+			this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', this._levelSpeed);
 			
 			// TODO: remove ---> debug button to game over screen
 			this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
@@ -45,7 +45,7 @@ module scenes {
 			}
 			
 			// add player
-			this._player = new objects.Player(this.game, 400, 50, 'dude', 0.2, 300);
+			this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
 			this.add.existing(this._player);
 			
 			// add pickup

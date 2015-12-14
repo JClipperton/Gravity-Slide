@@ -28,9 +28,9 @@ module objects {
 		 * Update Method for Parallax Background Class
 		 */
 		update(): void {
-			this._bgBack.tilePosition.x -= this._velocity * 0.75;
-			this._bgMiddle.tilePosition.x -= this._velocity * 0.85;
-			this._bgFront.tilePosition.x -= this._velocity;
+			this._bgBack.tilePosition.x -= this._velocity * 0.2;
+			this._bgMiddle.tilePosition.x -= this._velocity * 0.5;
+			this._bgFront.tilePosition.x -= this._velocity * 0.9;
 		}
 	}
 }
