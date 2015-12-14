@@ -31,6 +31,8 @@ var scenes;
             // ('asset key', 'url', width of each frame, height ditto, ?num of frames, ?margin btw frames, ?space btw frames)
             this.game.load.spritesheet('platformAnimGreen', '../Assets/images/platform_lit_spritesheet.png', 84, 11, 5);
             this.game.load.spritesheet('platformAnimBlue', '../Assets/images/platform_litblue_spritesheet.png', 84, 11, 5);
+            this.game.load.spritesheet('pickupBlue', '../Assets/images/crystal_32_blue.png', 32, 32, 8);
+            this.game.load.spritesheet('pickupGrey', '../Assets/images/crystal_32_grey.png', 32, 32, 8);
             this.game.load.spritesheet('dude', '../Assets/images/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
             // audio goes here

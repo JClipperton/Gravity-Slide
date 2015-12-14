@@ -23,10 +23,9 @@ module objects {
 		public update(): void {
 			// moves platform left
 			this.x -= this._speed;
+			
 			if (this.x < 0 - this.width) {
-				this.x = 800;
-				this.y = (Math.random() * 600) + 1;	
-				this._changeSprite(this.y);			
+				this._resetPosition();						
 			}
 		}
 		
@@ -35,14 +34,18 @@ module objects {
 		private _changeSprite(localY: number): void {			
 			if (localY <= (this.game.height * 0.5)) {
 				this.loadTexture('platformAnimGreen');
-				console.log(localY + ": above the center, " + this.key);
 			} else {
 				this.loadTexture('platformAnimBlue');
-				console.log(localY + ": below the center, " + this.key);
 			}
 			this.animations.add('animated', [0, 1, 2, 3, 4], 10, true);
 			this.animations.play('animated');				
-		}	
+		}
+		
+		private _resetPosition(): void {
+			this.x = 800;
+			this.y = (Math.random() * 600) + 1;
+			this._changeSprite(this.y);	
+		}
 		
 	}
 	

@@ -12,6 +12,7 @@ var scenes;
         function Play() {
             _super.call(this);
             this._platforms = new Array();
+            this._levelSpeed = 5;
             this._numberOfPlatforms = 5;
         }
         Play.prototype.create = function () {
@@ -19,23 +20,26 @@ var scenes;
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             // ADD OBJECTS
             // add scrolling background
-            this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', 4.8);
-            this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', 4.8);
+            this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', (this._levelSpeed * 0.96));
+            this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', (this._levelSpeed * 0.96));
             // TODO: remove ---> debug button to game over screen
             this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
             this._gameOverButton.anchor.setTo(0.5);
             // add platforms			
-            for (var platform = 0; platform < 5; platform++) {
+            for (var platform = 0; platform < this._numberOfPlatforms; platform++) {
                 var tempWidth = 400;
                 var tempY = (platform * 100) + 100;
                 var tempX = (platform * tempWidth);
-                var tempPlatform = new objects.Platform(this.game, tempX, tempY, tempWidth, 'platformAnimGreen', 5);
+                var tempPlatform = new objects.Platform(this.game, tempX, tempY, tempWidth, 'platformAnimGreen', this._levelSpeed);
                 this._platforms.push(tempPlatform);
                 this.add.existing(tempPlatform);
             }
             // add player
             this._player = new objects.Player(this.game, 400, 50, 'dude', 0.2, 300);
             this.add.existing(this._player);
+            // add pickup
+            this._pickup = new objects.PickUp(this.game, this._player, 800, 100, 'pickupGrey', this._levelSpeed);
+            this.add.existing(this._pickup);
         };
         Play.prototype.update = function () {
             // scroll background
