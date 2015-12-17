@@ -8,12 +8,18 @@ var scenes;
     // PLAY CLASS (state 2)
     var Play = (function (_super) {
         __extends(Play, _super);
+        //private _numberOfPlatforms: number = 5;		
         // CONSTRUCTOR ++++++++++++++++++++++++++
         function Play() {
             _super.call(this);
             this._platforms = new Array();
-            this._levelSpeed = 5;
-            this._numberOfPlatforms = 5;
+            this._level = 1;
+            if (this._level >= 3) {
+                this._levelSpeed = 6;
+            }
+            else {
+                this._levelSpeed = 5;
+            }
         }
         Play.prototype.create = function () {
             // start the physics engine
@@ -25,31 +31,23 @@ var scenes;
             // TODO: remove ---> debug button to game over screen
             this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
             this._gameOverButton.anchor.setTo(0.5);
-            // add platforms			
-            for (var platform = 0; platform < this._numberOfPlatforms; platform++) {
-                var tempWidth = 400;
-                var tempY = (platform * 100) + 100;
-                var tempX = (platform * tempWidth);
-                var tempPlatform = new objects.Platform(this.game, tempX, tempY, tempWidth, 'platformAnimGreen', this._levelSpeed);
-                this._platforms.push(tempPlatform);
-                this.add.existing(tempPlatform);
-            }
             // add player
             this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
             this.add.existing(this._player);
+            /*
             // add pickup
             this._pickup = new objects.PickUp(this.game, this._player, 800, 100, 'pickupGrey', this._levelSpeed);
             this.add.existing(this._pickup);
+            */
+            this._gameManager = new utilities.GameManager(this.game, this._player, this._level, this._levelSpeed);
+            this._gameManager.create();
         };
         Play.prototype.update = function () {
             // scroll background
             this._background1.update();
             this._background2.update();
-            // update physics
             this._updatePlayerGravity();
-            for (var i = 0; i < this._numberOfPlatforms; i++) {
-                this.game.physics.arcade.collide(this._player, this._platforms[i]);
-            }
+            this._gameManager.update();
         };
         Play.prototype.render = function () {
         };

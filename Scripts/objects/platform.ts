@@ -5,7 +5,7 @@ module objects {
 		private _speed: number;
 		
 		// CONSTRUCTOR ++++++++++++++++++++++++++++
-		constructor(game: Phaser.Game, x: number, y: number, width: number, spriteString: string, speed: number) {
+		constructor(game: Phaser.Game, x: number, y: number, width: number, spriteString?: string, speed?: number) {
 			super(game, x, y, spriteString);
 			this._speed = speed;
 			
@@ -23,7 +23,6 @@ module objects {
 		public update(): void {
 			// moves platform left
 			this.x -= this._speed;
-			
 			if (this.x < 0 - this.width) {
 				this._resetPosition();						
 			}

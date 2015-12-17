@@ -5,19 +5,24 @@ module scenes {
 		public game: Phaser.Game;
 		
 		// PRIVATE INSTANCE VARIABLES
+		private _gameManager: utilities.GameManager;
 		private _background1: objects.ParallaxBackground;
 		private _background2: objects.ParallaxBackground;	
 		private _gameOverButton: Phaser.Button;
 		private _player: objects.Player;
-		private _platforms: objects.Platform[] = new Array<objects.Platform>();
-		private _pickup: objects.PickUp;
+		// private _pickup: objects.PickUp;
 		
-		private _levelSpeed: number = 5;
-		private _numberOfPlatforms: number = 5;		
+		private _level: number = 1;
+		private _levelSpeed: number;	
 		
 		// CONSTRUCTOR ++++++++++++++++++++++++++
 		constructor() {
 			super();
+			if (this._level >= 3) {
+				this._levelSpeed = 6;
+			} else {
+				this._levelSpeed = 5;
+			}
 		}
 
 		create(): void {
@@ -33,37 +38,26 @@ module scenes {
 			this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
 			this._gameOverButton.anchor.setTo(0.5);			
 			
-			// add platforms			
-			for (var platform = 0; platform < this._numberOfPlatforms; platform++) {
-				var tempWidth: number = 400;
-				var tempY: number = (platform * 100) + 100;
-				var tempX: number = (platform * tempWidth);
-				var tempPlatform: objects.Platform = new objects.Platform(this.game, tempX, tempY, tempWidth, 'platformAnimGreen', this._levelSpeed);
-				this._platforms.push(tempPlatform);
-				
-				this.add.existing(tempPlatform);
-			}
 			
 			// add player
 			this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
 			this.add.existing(this._player);
 			
+			/*
 			// add pickup
 			this._pickup = new objects.PickUp(this.game, this._player, 800, 100, 'pickupGrey', this._levelSpeed);
 			this.add.existing(this._pickup);
-			
+			*/
+			this._gameManager = new utilities.GameManager(this.game, this._player, this._level, this._levelSpeed);
+			this._gameManager.create();	
 		}
-
+		
 		update(): void {
 			// scroll background
 			this._background1.update();
 			this._background2.update();
-			
-			// update physics
 			this._updatePlayerGravity();
-			for (var i = 0; i < this._numberOfPlatforms; i++) {
-				this.game.physics.arcade.collide(this._player, this._platforms[i]);
-			}			
+			this._gameManager.update()
 		}
 
 		render(): void {
