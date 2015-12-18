@@ -41,6 +41,8 @@ module scenes {
             // audio goes here
             this.game.load.audio('gameover', '../Assets/audio/badEnd.wav');
 			this.game.load.audio('jump', '../Assets/audio/player_jump.wav');
+			this.game.load.audio('pickupBlue', '../Assets/audio/pickup_currency.mp3');
+			this.game.load.audio('pickupGrey', '../Assets/audio/pickup_shield.mp3');
         }
 		
 		create(): void {

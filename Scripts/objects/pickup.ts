@@ -5,22 +5,28 @@ module objects {
 		private _speed: number;
 		private _value: number;
 		private _player: objects.Player;
+		private _pickupSound: Phaser.Sound;
+		private _active: boolean;
 		
 		// CONSTRUCTOR ++++++++++++++++++++++++++++
 		constructor(game: Phaser.Game, player: objects.Player, x: number, y: number, spriteString: string, speed: number) {
 			super(game, x, y, spriteString)
 			this._speed = speed;
 			this._player = player;
+			this._active = true;
 			
-			if (spriteString == 'pickupBlue') {
+			// assign audio and value based on key
+			if (this.key == 'pickupBlue') {
+				this._pickupSound = new Phaser.Sound(this.game, 'pickupBlue');
 				this._value = 5;
 			} else {
+				this._pickupSound = new Phaser.Sound(this.game, 'pickupGrey');
 				this._value = 1;
 			}
 			
 			// set up animation
-			this.animations.add('animate', [0, 1, 2, 3, 4, 5, 6, 7], 15, true);
-			this.animations.play('animate');
+			this.animations.add('animated', [0, 1, 2, 3, 4, 5, 6, 7], 15, true);
+			this.animations.play('animated');
 			
 			// enable physics
 			this.game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -30,21 +36,29 @@ module objects {
 		public update(): void {
 			// moves pick up left
 			this.x -= this._speed;
-			if (this.x <0)
-			this.x = 800;
 			
-			// kills/marks offscreen platforms for cleanup
+			// kills offscreen platforms for cleanup
 			if (this.x == 0 - this.width) {
 				this.kill();
-				// this._resetPosition();						
 			}
 			
-			if (this.game.physics.arcade.intersects(this._player.body, this.body)) {
-				// TODO: add scoring function to fire before destruction
+			// check collisions
+			if (this.game.physics.arcade.intersects(this._player.body, this.body)) {				
+				this._collectPickup();
+			}
+		}
+		
+		// PRIVATE METHODS
+		/** deactivate and collect pickup */
+		private _collectPickup(): void { // TODO: add scoring function to activate before destruction
+			if (this._active) {
+				
+				this._pickupSound.play();
 				this.alpha = 0;
 				this.kill();
 			}
-			
+			this._active = false;
 		}
+
 	}
 }

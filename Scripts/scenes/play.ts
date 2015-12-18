@@ -5,7 +5,7 @@ module scenes {
 		public game: Phaser.Game;
 		
 		// PRIVATE INSTANCE VARIABLES
-		private _gameManager: utilities.GameManager;
+		private _objectManager: utilities.ObjectManager;
 		private _background1: objects.ParallaxBackground;
 		private _background2: objects.ParallaxBackground;	
 		private _gameOverButton: Phaser.Button;
@@ -47,8 +47,8 @@ module scenes {
 			this._pickup = new objects.PickUp(this.game, this._player, 800, 100, 'pickupGrey', this._levelSpeed);
 			this.add.existing(this._pickup);
 			*/
-			this._gameManager = new utilities.GameManager(this.game, this._player, this._level, this._levelSpeed);
-			this._gameManager.start();	
+			this._objectManager = new utilities.ObjectManager(this.game, this._player, this._level, this._levelSpeed);
+			this._objectManager.start();	
 		}
 		
 		update(): void {
@@ -56,7 +56,7 @@ module scenes {
 			this._background1.update();
 			this._background2.update();
 			this._updatePlayerGravity();
-			this._gameManager.update()			
+			this._objectManager.update()			
 		}
 
 		render(): void {
