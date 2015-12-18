@@ -24,22 +24,30 @@ var utilities;
             // while level timer is active
             // for every platform...
             for (var pIndex = 0; pIndex < this._platforms.length; pIndex++) {
-                this._platforms[pIndex].update(); // run update on each platform
+                this._platforms[pIndex].update(); // ...run update
                 // if they're marked dead...
                 if (this._platforms[pIndex].alive == false) {
                     this._platforms.splice(pIndex, 1); // cut them out of the array
                 }
             }
             // for every pickup...
-            for (var pIndex = 0; pIndex < this._pickups.length; pIndex++) {
-                this._pickups[pIndex].update(); // run update on each pickup				
+            for (var puIndex = 0; puIndex < this._pickups.length; puIndex++) {
+                this._pickups[puIndex].update(); // ...run update				
                 // if they're marked dead...
-                if (this._pickups[pIndex].alive == false) {
-                    console.log(this._pickups[pIndex].alive);
-                    this._pickups.splice(pIndex, 1); // cut them out of the array
+                if (this._pickups[puIndex].alive == false) {
+                    this._pickups.splice(puIndex, 1); // cut them out of the array
                 }
             }
-            // check collisions
+            // for every ship...
+            for (var shipIndex = 0; shipIndex < this._ships.length; shipIndex++) {
+                this._ships[shipIndex].update(); // ...run update				
+                console.log(this._ships.length);
+                // if they're marked dead...
+                if (this._ships[shipIndex].alive == false) {
+                    this._ships.splice(shipIndex, 1); // cut them out of the array
+                }
+            }
+            // check platform collisions
             for (var pIndex = 0; pIndex < this._platforms.length; pIndex++) {
                 this.game.physics.arcade.collide(this.player, this._platforms[pIndex]);
             }
@@ -64,6 +72,10 @@ var utilities;
                 return new objects.PickUp(this.game, this.player, x, y, 'pickupGrey', this._levelSpeed);
             }
         };
+        /** return a new ship object */
+        ObjectManager.prototype._SpawnShip = function (x, y) {
+            return new objects.Ship(this.game, this.player, x, y, 200, 'ship', this._levelSpeed);
+        };
         /** creates appropriate objects for selected level section */
         ObjectManager.prototype._SpawnLevelSection = function () {
             // choose a random section to spawn
@@ -80,6 +92,9 @@ var utilities;
                     this._pickups.push(this._SpawnPickup(1800, 150));
                     this._pickups.push(this._SpawnPickup(3000, 50));
                     this._pickups.push(this._SpawnPickup(3800, 50, true));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 350));
+                    }
                     break;
                 case 2:
                     this._platforms.push(this._SpawnPlatform(800, 300));
@@ -90,6 +105,9 @@ var utilities;
                     this._pickups.push(this._SpawnPickup(1800, 450));
                     this._pickups.push(this._SpawnPickup(3000, 550));
                     this._pickups.push(this._SpawnPickup(3800, 550, true));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 250));
+                    }
                     break;
                 case 3:
                     this._platforms.push(this._SpawnPlatform(800, 200));
@@ -119,6 +137,9 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(3200, 400));
                     this._pickups.push(this._SpawnPickup(2200, 550));
                     this._pickups.push(this._SpawnPickup(3000, 150, true));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 550));
+                    }
                     break;
                 case 6:
                     this._platforms.push(this._SpawnPlatform(800, 400));
@@ -128,6 +149,9 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(3200, 200));
                     this._pickups.push(this._SpawnPickup(2200, 50));
                     this._pickups.push(this._SpawnPickup(3000, 450, true));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 150));
+                    }
                     break;
                 case 7:
                     this._platforms.push(this._SpawnPlatform(800, 200));
@@ -162,6 +186,9 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(3200, 400));
                     this._pickups.push(this._SpawnPickup(1000, 250, true));
                     this._pickups.push(this._SpawnPickup(3400, 450));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 300));
+                    }
                     break;
                 case 10:
                     this._platforms.push(this._SpawnPlatform(800, 400));
@@ -172,6 +199,9 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(3200, 200));
                     this._pickups.push(this._SpawnPickup(1000, 350, true));
                     this._pickups.push(this._SpawnPickup(3400, 450));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 300));
+                    }
                     break;
                 case 11:
                     this._platforms.push(this._SpawnPlatform(800, 300));
@@ -204,6 +234,10 @@ var utilities;
                     this._pickups.push(this._SpawnPickup(3000, 250));
                     this._pickups.push(this._SpawnPickup(3400, 150));
                     this._pickups.push(this._SpawnPickup(3800, 50));
+                    if (this._currentLevel > 1) {
+                        this._ships.push(this._SpawnShip(1200, 450));
+                        this._ships.push(this._SpawnShip(1200, 550));
+                    }
                     break;
                 case 14:
                     this._platforms.push(this._SpawnPlatform(800, 100));
@@ -235,8 +269,12 @@ var utilities;
                 this.game.add.existing(this._platforms[pIndex]);
             }
             // add pickups to scene
-            for (var pIndex = 0; pIndex < this._pickups.length; pIndex++) {
-                this.game.add.existing(this._pickups[pIndex]);
+            for (var puIndex = 0; puIndex < this._pickups.length; puIndex++) {
+                this.game.add.existing(this._pickups[puIndex]);
+            }
+            // add ships to scene
+            for (var shipIndex = 0; shipIndex < this._ships.length; shipIndex++) {
+                this.game.add.existing(this._ships[shipIndex]);
             }
         };
         return ObjectManager;

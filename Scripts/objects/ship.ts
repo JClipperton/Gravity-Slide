@@ -25,9 +25,11 @@ module objects {
 			this.animations.add('go', [0, 1], 10, true);
 			this.animations.play('go');
 			
+			// show warning
 			this._arrow = this.game.add.image(700, y, 'arrow');
 			this._arrow.scale.setTo(-0.5, 0.5);
 			this.game.time.events.add(Phaser.Timer.HALF, this._fadeArrow, this);
+			
 			// enable physics
 			this.game.physics.enable(this, Phaser.Physics.ARCADE);
 			this.body.immovable = true;
@@ -37,7 +39,7 @@ module objects {
 		/** Update Method for Ship Class */
 		public update(): void {
 			// moves ship left
-			this.x -= 15;
+			this.x -= this._speed;
 			
 			// kills/marks offscreen ship for cleanup
 			if (this.x == 0 - this.width) {

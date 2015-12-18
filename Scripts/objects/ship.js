@@ -20,6 +20,7 @@ var objects;
             this.loadTexture('ship');
             this.animations.add('go', [0, 1], 10, true);
             this.animations.play('go');
+            // show warning
             this._arrow = this.game.add.image(700, y, 'arrow');
             this._arrow.scale.setTo(-0.5, 0.5);
             this.game.time.events.add(Phaser.Timer.HALF, this._fadeArrow, this);
@@ -31,7 +32,7 @@ var objects;
         /** Update Method for Ship Class */
         Ship.prototype.update = function () {
             // moves ship left
-            this.x -= 15;
+            this.x -= this._speed;
             // kills/marks offscreen ship for cleanup
             if (this.x == 0 - this.width) {
                 this.kill();

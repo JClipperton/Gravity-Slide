@@ -10,9 +10,9 @@ module scenes {
 		private _background2: objects.ParallaxBackground;	
 		private _gameOverButton: Phaser.Button;
 		private _player: objects.Player;
-		private _ship: objects.Ship;
+		// private _ship: objects.Ship;
 		
-		private _level: number = 1;
+		private _level: number = 2;
 		private _levelSpeed: number;	
 		
 		// CONSTRUCTOR ++++++++++++++++++++++++++
@@ -42,9 +42,10 @@ module scenes {
 			this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
 			this.add.existing(this._player);
 			
+			/*
 			// add ship
-			this._ship = new objects.Ship(this.game, this._player, 1200, 300, 200, 'ship', (this._levelSpeed));
-			this.add.existing(this._ship);
+			this._ship = new objects.Ship(this.game, this._player, 1200, 300, 200, 'ship', this._levelSpeed);
+			this.add.existing(this._ship);*/
 			
 			// add object manager
 			this._objectManager = new utilities.ObjectManager(this.game, this._player, this._level, this._levelSpeed);

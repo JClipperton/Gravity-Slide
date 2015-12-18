@@ -11,7 +11,8 @@ var scenes;
         // CONSTRUCTOR ++++++++++++++++++++++++++
         function Play() {
             _super.call(this);
-            this._level = 1;
+            // private _ship: objects.Ship;
+            this._level = 2;
             if (this._level >= 3) {
                 this._levelSpeed = 5;
             }
@@ -32,9 +33,10 @@ var scenes;
             // add player
             this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
             this.add.existing(this._player);
+            /*
             // add ship
-            this._ship = new objects.Ship(this.game, this._player, 1200, 300, 200, 'ship', (this._levelSpeed));
-            this.add.existing(this._ship);
+            this._ship = new objects.Ship(this.game, this._player, 1200, 300, 200, 'ship', this._levelSpeed);
+            this.add.existing(this._ship);*/
             // add object manager
             this._objectManager = new utilities.ObjectManager(this.game, this._player, this._level, this._levelSpeed);
             this._objectManager.start();
