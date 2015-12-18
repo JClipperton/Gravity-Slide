@@ -282,7 +282,7 @@ module utilities {
 					
 					if (this._currentLevel > 1) {
 						this._ships.push(this._SpawnShip(1200, 450));
-						this._ships.push(this._SpawnShip(1200, 550));
+						this._ships.push(this._SpawnShip(1200, 150));
 					}
 					break;
 				case 14:

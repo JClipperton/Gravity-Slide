@@ -14,6 +14,7 @@ var objects;
             this._player = player;
             this.x = x;
             this.width = width;
+            this.height = 100;
             this._speed = (speed * 2);
             // assign audio
             // set up animation

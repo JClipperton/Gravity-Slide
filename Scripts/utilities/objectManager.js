@@ -236,7 +236,7 @@ var utilities;
                     this._pickups.push(this._SpawnPickup(3800, 50));
                     if (this._currentLevel > 1) {
                         this._ships.push(this._SpawnShip(1200, 450));
-                        this._ships.push(this._SpawnShip(1200, 550));
+                        this._ships.push(this._SpawnShip(1200, 150));
                     }
                     break;
                 case 14:

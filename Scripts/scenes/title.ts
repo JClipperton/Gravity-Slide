@@ -4,9 +4,11 @@ module scenes {
 		// PUBLIC INSTANCE VARIABLES
 		public game: Phaser.Game;
 		
-		// PRIVATE INSTANCE VARIABLES
+		// PRIVATE INSTANCE VARIABLES		
+		private _titleScreenBg: Phaser.Image;
 		private _preloadBar: Phaser.Sprite;
 		private _titleScreenImage: Phaser.Sprite;
+		private _phaserLogo: Phaser.Image;
 		
 		// CONSTRUCTOR ++++++++++++++++++++++++++
 		constructor() {
@@ -21,12 +23,13 @@ module scenes {
 			
             // graphics go here
             this.game.load.image('logo', '../Assets/images/logo300x300.jpg');
-            this.game.load.image('sky', '../Assets/images/sky.png');
 			this.game.load.image('firstaid', '../Assets/images/firstaid.png');
 			this.game.load.image('arrow', '../Assets/images/arrow_red.png');
 			this.game.load.image('bgBack', '../Assets/images/background_back.png');
 			this.game.load.image('bgMiddle', '../Assets/images/background_middle.png');
 			this.game.load.image('bgFront', '../Assets/images/background_front.png');
+			this.game.load.image('mainSplash', '../Assets/images/Gravity Slide Splash.png');
+			this.game.load.image('gameSplash2', '../Assets/images/gameSplash2.jpg');
             
             // spritesheets go here
 			// ('asset key', 'url', width of each frame, height ditto, ?num of frames, ?margin btw frames, ?space btw frames)
@@ -44,9 +47,13 @@ module scenes {
 			this.game.load.audio('jump', '../Assets/audio/player_jump.wav');
 			this.game.load.audio('pickupBlue', '../Assets/audio/pickup_currency.mp3');
 			this.game.load.audio('pickupGrey', '../Assets/audio/pickup_shield.mp3');
+			
+			
         }
 		
 		create(): void {
+			this._titleScreenBg = this.game.add.image(0, 0, 'gameSplash1');
+			this.game.add.existing(this._titleScreenBg);
 			var tween = this.add.tween(this._preloadBar).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
             tween.onComplete.add(this._loadLogo, this);	// load logo on complete					
 			
