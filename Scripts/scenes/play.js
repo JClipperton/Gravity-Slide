@@ -8,17 +8,16 @@ var scenes;
     // PLAY CLASS (state 2)
     var Play = (function (_super) {
         __extends(Play, _super);
-        //private _numberOfPlatforms: number = 5;		
         // CONSTRUCTOR ++++++++++++++++++++++++++
         function Play() {
             _super.call(this);
-            this._platforms = new Array();
+            // private _pickup: objects.PickUp;
             this._level = 1;
             if (this._level >= 3) {
-                this._levelSpeed = 6;
+                this._levelSpeed = 5;
             }
             else {
-                this._levelSpeed = 5;
+                this._levelSpeed = 4;
             }
         }
         Play.prototype.create = function () {
@@ -40,7 +39,7 @@ var scenes;
             this.add.existing(this._pickup);
             */
             this._gameManager = new utilities.GameManager(this.game, this._player, this._level, this._levelSpeed);
-            this._gameManager.create();
+            this._gameManager.start();
         };
         Play.prototype.update = function () {
             // scroll background

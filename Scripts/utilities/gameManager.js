@@ -10,20 +10,23 @@ var utilities;
             this.player = player;
             this._currentLevel = level;
             this._levelSpeed = speed;
+            // TODO: make number of sections tied to level
+            this._numberOfSections = 10;
         }
-        GameManager.prototype.create = function () {
-            this._SpawnLevelSection(1);
+        /** Run initial set up for Game Manager Class */
+        GameManager.prototype.start = function () {
+            this._SpawnLevelSection();
+            this.game.time.events.repeat(Phaser.Timer.SECOND * 6, this._numberOfSections, this._SpawnLevelSection, this);
         };
         /** Update Method for Game Manager Class */
         GameManager.prototype.update = function () {
-            // while level timer is active {
-            // 	if spawn timer counts down {
-            // this._levelSection = this._ChooseLevelSection();
-            // this._SpawnLevelSection(this._levelSection);
-            // 	}
-            // }
+            // while level timer is active
             for (var i = 0; i < this._platforms.length; i++) {
-                this._platforms[i].update();
+                this._platforms[i].update(); // run update on each platform
+                if (this._platforms[i].alive == false) {
+                    this._platforms.splice(i, 1);
+                    console.log(this._platforms.length);
+                }
             }
             for (var i = 0; i < this._platforms.length; i++) {
                 this.game.physics.arcade.collide(this.player, this._platforms[i]);
@@ -36,7 +39,6 @@ var utilities;
         };
         /** returns a new platform object  */
         GameManager.prototype._SpawnPlatform = function (x, y, width) {
-            console.log("spawn platform");
             var tempWidth = width || 400;
             return new objects.Platform(this.game, x, y, tempWidth, 'platformAnimGreen', this._levelSpeed);
         };
@@ -51,8 +53,11 @@ var utilities;
             }
         };
         /** creates appropriate objects for selected level section */
-        GameManager.prototype._SpawnLevelSection = function (sectionNumber) {
-            console.log("in the spawn level function");
+        GameManager.prototype._SpawnLevelSection = function () {
+            // choose a random section to spawn
+            var sectionNumber = this._ChooseLevelSection();
+            console.log("section number:" + sectionNumber);
+            // select platform locations etc. based on section number
             switch (sectionNumber) {
                 case 1:
                     this._platforms.push(this._SpawnPlatform(800, 300));
@@ -62,45 +67,112 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 2:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 400));
+                    this._platforms.push(this._SpawnPlatform(2000, 400));
+                    this._platforms.push(this._SpawnPlatform(2400, 500));
+                    this._platforms.push(this._SpawnPlatform(3200, 500));
                     break;
                 case 3:
+                    this._platforms.push(this._SpawnPlatform(800, 200));
+                    this._platforms.push(this._SpawnPlatform(1600, 300));
+                    this._platforms.push(this._SpawnPlatform(2000, 300));
+                    this._platforms.push(this._SpawnPlatform(2400, 200));
+                    this._platforms.push(this._SpawnPlatform(2800, 400));
+                    this._platforms.push(this._SpawnPlatform(3200, 300));
                     break;
                 case 4:
+                    this._platforms.push(this._SpawnPlatform(800, 400));
+                    this._platforms.push(this._SpawnPlatform(1600, 300));
+                    this._platforms.push(this._SpawnPlatform(2000, 300));
+                    this._platforms.push(this._SpawnPlatform(2400, 400));
+                    this._platforms.push(this._SpawnPlatform(2800, 200));
+                    this._platforms.push(this._SpawnPlatform(3200, 300));
                     break;
                 case 5:
+                    this._platforms.push(this._SpawnPlatform(800, 200));
+                    this._platforms.push(this._SpawnPlatform(800, 400));
+                    this._platforms.push(this._SpawnPlatform(2000, 500));
+                    this._platforms.push(this._SpawnPlatform(2800, 200));
+                    this._platforms.push(this._SpawnPlatform(3200, 400));
                     break;
+                // TODO: finish level instances
                 case 6:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 7:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 8:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 9:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 10:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 11:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 12:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 13:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 14:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 case 15:
+                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 100));
                     break;
                 default:
-                    console.log("Game Manager attempted to spawn undefined level section");
-                    break;
+                    return console.log("Game Manager attempted to spawn undefined level section");
             }
             for (var i = 0; i < this._platforms.length; i++) {
                 this.game.add.existing(this._platforms[i]);
-                console.log("platform x: " + this._platforms[i].x + " y:" + this._platforms[i].y);
             }
-        };
-        GameManager.prototype._StartSectionTimer = function () {
-            this._levelSection = this._ChooseLevelSection();
-            //this.game.time.events.add(Phaser.Timer.SECOND * 4, this._SpawnLevelSection(this._levelSection), this);
         };
         return GameManager;
     })();

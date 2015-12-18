@@ -33,9 +33,16 @@ module objects {
 			if (this.x <0)
 			this.x = 800;
 			
+			// kills/marks offscreen platforms for cleanup
+			if (this.x == 0 - this.width) {
+				this.kill();
+				// this._resetPosition();						
+			}
+			
 			if (this.game.physics.arcade.intersects(this._player.body, this.body)) {
 				// TODO: add scoring function to fire before destruction
-				this.destroy();
+				this.alpha = 0;
+				this.kill();
 			}
 			
 		}

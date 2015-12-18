@@ -23,8 +23,9 @@ var objects;
         Platform.prototype.update = function () {
             // moves platform left
             this.x -= this._speed;
-            if (this.x < 0 - this.width) {
-                this._resetPosition();
+            // kills/marks offscreen platforms for cleanup
+            if (this.x == 0 - this.width) {
+                this.kill();
             }
         };
         // PRIVATE METHODS ++++++++++++++++++++++++++++++
@@ -38,11 +39,6 @@ var objects;
             }
             this.animations.add('animated', [0, 1, 2, 3, 4], 10, true);
             this.animations.play('animated');
-        };
-        Platform.prototype._resetPosition = function () {
-            this.x = 800;
-            this.y = (Math.random() * 600) + 1;
-            this._changeSprite(this.y);
         };
         return Platform;
     })(Phaser.Sprite);

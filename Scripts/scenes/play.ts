@@ -19,9 +19,9 @@ module scenes {
 		constructor() {
 			super();
 			if (this._level >= 3) {
-				this._levelSpeed = 6;
-			} else {
 				this._levelSpeed = 5;
+			} else {
+				this._levelSpeed = 4;
 			}
 		}
 
@@ -37,8 +37,7 @@ module scenes {
 			// TODO: remove ---> debug button to game over screen
 			this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
 			this._gameOverButton.anchor.setTo(0.5);			
-			
-			
+						
 			// add player
 			this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
 			this.add.existing(this._player);
@@ -49,7 +48,7 @@ module scenes {
 			this.add.existing(this._pickup);
 			*/
 			this._gameManager = new utilities.GameManager(this.game, this._player, this._level, this._levelSpeed);
-			this._gameManager.create();	
+			this._gameManager.start();	
 		}
 		
 		update(): void {
@@ -57,7 +56,7 @@ module scenes {
 			this._background1.update();
 			this._background2.update();
 			this._updatePlayerGravity();
-			this._gameManager.update()
+			this._gameManager.update()			
 		}
 
 		render(): void {
