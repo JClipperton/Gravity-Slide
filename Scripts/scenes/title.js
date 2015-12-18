@@ -21,6 +21,7 @@ var scenes;
             this.game.load.image('logo', '../Assets/images/Phaser-Logo-Small.png');
             this.game.load.image('sky', '../Assets/images/sky.png');
             this.game.load.image('firstaid', '../Assets/images/firstaid.png');
+            this.game.load.image('arrow', '../Assets/images/arrow_red.png');
             this.game.load.image('bgBack', '../Assets/images/background_back.png');
             this.game.load.image('bgMiddle', '../Assets/images/background_middle.png');
             this.game.load.image('bgFront', '../Assets/images/background_front.png');
@@ -33,6 +34,7 @@ var scenes;
             this.game.load.spritesheet('baddie', '../Assets/images/baddie.png', 32, 48);
             // sprite atlas go here
             this.game.load.atlas('player', '../Assets/images/xeon_player.png', '../Assets/images/xeon_player.json');
+            this.game.load.atlas('ship', '../Assets/images/ship_red.png', '../Assets/images/ship_red.json');
             // audio goes here
             this.game.load.audio('gameover', '../Assets/audio/badEnd.wav');
             this.game.load.audio('jump', '../Assets/audio/player_jump.wav');

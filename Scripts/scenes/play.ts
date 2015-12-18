@@ -10,7 +10,7 @@ module scenes {
 		private _background2: objects.ParallaxBackground;	
 		private _gameOverButton: Phaser.Button;
 		private _player: objects.Player;
-		// private _pickup: objects.PickUp;
+		private _ship: objects.Ship;
 		
 		private _level: number = 1;
 		private _levelSpeed: number;	
@@ -42,11 +42,11 @@ module scenes {
 			this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
 			this.add.existing(this._player);
 			
-			/*
-			// add pickup
-			this._pickup = new objects.PickUp(this.game, this._player, 800, 100, 'pickupGrey', this._levelSpeed);
-			this.add.existing(this._pickup);
-			*/
+			// add ship
+			this._ship = new objects.Ship(this.game, this._player, 1200, 300, 200, 'ship', (this._levelSpeed));
+			this.add.existing(this._ship);
+			
+			// add object manager
 			this._objectManager = new utilities.ObjectManager(this.game, this._player, this._level, this._levelSpeed);
 			this._objectManager.start();	
 		}
@@ -60,7 +60,6 @@ module scenes {
 		}
 
 		render(): void {
-			
 		}
 		
 		// PRIVATE METHODS		

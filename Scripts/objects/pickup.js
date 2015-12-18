@@ -16,11 +16,11 @@ var objects;
             this._active = true;
             // assign audio and value based on key
             if (this.key == 'pickupBlue') {
-                this._pickupSound = new Phaser.Sound(this.game, 'pickupBlue');
+                this._pickupSound = new Phaser.Sound(this.game, 'pickupBlue', 1, false);
                 this._value = 5;
             }
             else {
-                this._pickupSound = new Phaser.Sound(this.game, 'pickupGrey');
+                this._pickupSound = new Phaser.Sound(this.game, 'pickupGrey', 1, false);
                 this._value = 1;
             }
             // set up animation

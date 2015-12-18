@@ -1,6 +1,7 @@
 module objects {
+	// PLAYER STATE ENUM
 	export enum PlayerState { IDLE, RUNNING, JUMPING }
-
+	// PLAYER CLASS
 	export class Player extends Phaser.Sprite {
 		// PRIVATE INSTANCE VARIABLES
 		private _bounce: number;
@@ -22,7 +23,7 @@ module objects {
 		constructor(game: Phaser.Game, x: number, y: number, spriteString: string, bounce: number, gravity: number) {
 			super(game, x, y, spriteString);
 			
-			// set registration point to the center of the objects
+			// set registration point to the center of the object
 			this.anchor.setTo(0.5, 0.5);
 
 			this._bounce = bounce; // bounciness of the player
@@ -48,13 +49,16 @@ module objects {
 			
 			
 			// assign player sounds
-			this._jumpSound = new Phaser.Sound(this.game, 'jump');
+			this._jumpSound = new Phaser.Sound(this.game, 'jump', 0.6);
 		}
 		
 		/** Update Method for Player Class */
-		public update(): void {
+		update(): void {
 			// update inputs
 			this._updateInputs();
+		}
+		
+		render(): void {
 		}
 		
 		// PUBLIC METHODS

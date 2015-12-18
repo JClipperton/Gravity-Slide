@@ -4,6 +4,7 @@
 /// <reference path="../objects/player.ts"/>
 /// <reference path="../objects/platform.ts"/>
 /// <reference path="../objects/pickup.ts"/>
+/// <reference path="../objects/ship.ts"/>
 
 /// <reference path="../utilities/objectManager.ts"/>
 

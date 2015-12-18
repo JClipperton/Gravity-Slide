@@ -1,11 +1,12 @@
 var utilities;
 (function (utilities) {
-    // GAME MANAGER CLASS
+    // OBJECT MANAGER CLASS
     var ObjectManager = (function () {
         // CONSTRUCTOR ++++++++++++++++++++++++++
         function ObjectManager(game, player, level, speed) {
             this._platforms = new Array();
             this._pickups = new Array();
+            this._ships = new Array();
             this.game = game;
             this.player = player;
             this._currentLevel = level;
@@ -46,7 +47,7 @@ var utilities;
         // PRIVATE METHODS
         /** randomly picks a number between 1 and 15 */
         ObjectManager.prototype._ChooseLevelSection = function () {
-            return this.game.rnd.between(1, 5); // TODO: Set back to 15
+            return this.game.rnd.between(1, 15);
         };
         /** returns a new platform object  */
         ObjectManager.prototype._SpawnPlatform = function (x, y, width) {
@@ -76,7 +77,9 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(2000, 200));
                     this._platforms.push(this._SpawnPlatform(2400, 100));
                     this._platforms.push(this._SpawnPlatform(3200, 100));
-                    this._pickups.push(this._SpawnPickup(1800, 150, true));
+                    this._pickups.push(this._SpawnPickup(1800, 150));
+                    this._pickups.push(this._SpawnPickup(3000, 50));
+                    this._pickups.push(this._SpawnPickup(3800, 50, true));
                     break;
                 case 2:
                     this._platforms.push(this._SpawnPlatform(800, 300));
@@ -84,7 +87,9 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(2000, 400));
                     this._platforms.push(this._SpawnPlatform(2400, 500));
                     this._platforms.push(this._SpawnPlatform(3200, 500));
-                    this._pickups.push(this._SpawnPickup(1800, 450, true));
+                    this._pickups.push(this._SpawnPickup(1800, 450));
+                    this._pickups.push(this._SpawnPickup(3000, 550));
+                    this._pickups.push(this._SpawnPickup(3800, 550, true));
                     break;
                 case 3:
                     this._platforms.push(this._SpawnPlatform(800, 200));
@@ -93,6 +98,7 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(2400, 200));
                     this._platforms.push(this._SpawnPlatform(2800, 400));
                     this._platforms.push(this._SpawnPlatform(3200, 300));
+                    this._pickups.push(this._SpawnPickup(2600, 150));
                     this._pickups.push(this._SpawnPickup(3000, 450));
                     break;
                 case 4:
@@ -102,6 +108,7 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(2400, 400));
                     this._platforms.push(this._SpawnPlatform(2800, 200));
                     this._platforms.push(this._SpawnPlatform(3200, 300));
+                    this._pickups.push(this._SpawnPickup(2600, 450));
                     this._pickups.push(this._SpawnPickup(3000, 150));
                     break;
                 case 5:
@@ -111,77 +118,114 @@ var utilities;
                     this._platforms.push(this._SpawnPlatform(2800, 200));
                     this._platforms.push(this._SpawnPlatform(3200, 400));
                     this._pickups.push(this._SpawnPickup(2200, 550));
+                    this._pickups.push(this._SpawnPickup(3000, 150, true));
                     break;
-                // TODO: finish level instances
                 case 6:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 400));
+                    this._platforms.push(this._SpawnPlatform(800, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 100));
+                    this._platforms.push(this._SpawnPlatform(2800, 400));
+                    this._platforms.push(this._SpawnPlatform(3200, 200));
+                    this._pickups.push(this._SpawnPickup(2200, 50));
+                    this._pickups.push(this._SpawnPickup(3000, 450, true));
                     break;
                 case 7:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 200));
+                    this._platforms.push(this._SpawnPlatform(1600, 400));
+                    this._platforms.push(this._SpawnPlatform(2000, 300));
+                    this._platforms.push(this._SpawnPlatform(2400, 300));
+                    this._platforms.push(this._SpawnPlatform(2800, 400));
+                    this._platforms.push(this._SpawnPlatform(3600, 200));
+                    this._pickups.push(this._SpawnPickup(1800, 450));
+                    this._pickups.push(this._SpawnPickup(2200, 550));
+                    this._pickups.push(this._SpawnPickup(3000, 550));
+                    this._pickups.push(this._SpawnPickup(3400, 450));
                     break;
                 case 8:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 400));
+                    this._platforms.push(this._SpawnPlatform(1600, 200));
+                    this._platforms.push(this._SpawnPlatform(2000, 300));
+                    this._platforms.push(this._SpawnPlatform(2400, 300));
+                    this._platforms.push(this._SpawnPlatform(2800, 200));
+                    this._platforms.push(this._SpawnPlatform(3600, 400));
+                    this._pickups.push(this._SpawnPickup(1800, 150));
+                    this._pickups.push(this._SpawnPickup(2200, 50));
+                    this._pickups.push(this._SpawnPickup(3000, 50));
+                    this._pickups.push(this._SpawnPickup(3400, 150));
                     break;
                 case 9:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
+                    this._platforms.push(this._SpawnPlatform(800, 200));
                     this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(1600, 400));
+                    this._platforms.push(this._SpawnPlatform(2400, 200));
+                    this._platforms.push(this._SpawnPlatform(2800, 400));
+                    this._platforms.push(this._SpawnPlatform(3200, 400));
+                    this._pickups.push(this._SpawnPickup(1000, 250, true));
+                    this._pickups.push(this._SpawnPickup(3400, 450));
                     break;
                 case 10:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 400));
+                    this._platforms.push(this._SpawnPlatform(1200, 400));
+                    this._platforms.push(this._SpawnPlatform(1600, 200));
+                    this._platforms.push(this._SpawnPlatform(2400, 400));
+                    this._platforms.push(this._SpawnPlatform(2800, 200));
+                    this._platforms.push(this._SpawnPlatform(3200, 200));
+                    this._pickups.push(this._SpawnPickup(1000, 350, true));
+                    this._pickups.push(this._SpawnPickup(3400, 450));
                     break;
                 case 11:
                     this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
+                    this._platforms.push(this._SpawnPlatform(1200, 300));
+                    this._platforms.push(this._SpawnPlatform(1600, 400));
+                    this._platforms.push(this._SpawnPlatform(2000, 400));
+                    this._platforms.push(this._SpawnPlatform(2400, 500));
                     this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._pickups.push(this._SpawnPickup(2600, 550));
+                    this._pickups.push(this._SpawnPickup(3400, 50));
                     break;
                 case 12:
                     this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
+                    this._platforms.push(this._SpawnPlatform(1200, 300));
+                    this._platforms.push(this._SpawnPlatform(1600, 200));
                     this._platforms.push(this._SpawnPlatform(2000, 200));
                     this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(3200, 500));
+                    this._pickups.push(this._SpawnPickup(2600, 50));
+                    this._pickups.push(this._SpawnPickup(3400, 550));
                     break;
                 case 13:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 500));
+                    this._platforms.push(this._SpawnPlatform(2000, 300));
+                    this._platforms.push(this._SpawnPlatform(2400, 300));
+                    this._platforms.push(this._SpawnPlatform(3600, 100));
+                    this._platforms.push(this._SpawnPlatform(3600, 500));
+                    this._pickups.push(this._SpawnPickup(2600, 350));
+                    this._pickups.push(this._SpawnPickup(3000, 250));
+                    this._pickups.push(this._SpawnPickup(3400, 150));
+                    this._pickups.push(this._SpawnPickup(3800, 50));
                     break;
                 case 14:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 500));
+                    this._platforms.push(this._SpawnPlatform(1600, 300));
+                    this._platforms.push(this._SpawnPlatform(2800, 300));
+                    this._platforms.push(this._SpawnPlatform(3600, 100));
+                    this._platforms.push(this._SpawnPlatform(3600, 500));
+                    this._pickups.push(this._SpawnPickup(2400, 450));
+                    this._pickups.push(this._SpawnPickup(1800, 250));
+                    this._pickups.push(this._SpawnPickup(3000, 250));
                     break;
                 case 15:
-                    this._platforms.push(this._SpawnPlatform(800, 300));
-                    this._platforms.push(this._SpawnPlatform(1200, 200));
-                    this._platforms.push(this._SpawnPlatform(2000, 200));
-                    this._platforms.push(this._SpawnPlatform(2400, 100));
-                    this._platforms.push(this._SpawnPlatform(3200, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 100));
+                    this._platforms.push(this._SpawnPlatform(800, 500));
+                    this._platforms.push(this._SpawnPlatform(1600, 300));
+                    this._platforms.push(this._SpawnPlatform(2800, 300));
+                    this._platforms.push(this._SpawnPlatform(3600, 100));
+                    this._platforms.push(this._SpawnPlatform(3600, 500));
+                    this._pickups.push(this._SpawnPickup(2400, 150));
+                    this._pickups.push(this._SpawnPickup(1800, 350));
+                    this._pickups.push(this._SpawnPickup(3000, 350));
                     break;
                 default:
                     return console.log("Game Manager attempted to spawn undefined level section");

@@ -5,18 +5,20 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var objects;
 (function (objects) {
+    // PLAYER STATE ENUM
     (function (PlayerState) {
         PlayerState[PlayerState["IDLE"] = 0] = "IDLE";
         PlayerState[PlayerState["RUNNING"] = 1] = "RUNNING";
         PlayerState[PlayerState["JUMPING"] = 2] = "JUMPING";
     })(objects.PlayerState || (objects.PlayerState = {}));
     var PlayerState = objects.PlayerState;
+    // PLAYER CLASS
     var Player = (function (_super) {
         __extends(Player, _super);
         // CONSTRUCTOR ++++++++++++++++++++++++++++
         function Player(game, x, y, spriteString, bounce, gravity) {
             _super.call(this, game, x, y, spriteString);
-            // set registration point to the center of the objects
+            // set registration point to the center of the object
             this.anchor.setTo(0.5, 0.5);
             this._bounce = bounce; // bounciness of the player
             this._gravity = gravity; // pull of gravity on the player			
@@ -36,7 +38,7 @@ var objects;
             */
             this.animations.add('run', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 15, true);
             // assign player sounds
-            this._jumpSound = new Phaser.Sound(this.game, 'jump');
+            this._jumpSound = new Phaser.Sound(this.game, 'jump', 0.6);
         }
         Object.defineProperty(Player.prototype, "Gravity", {
             get: function () {
@@ -53,6 +55,8 @@ var objects;
         Player.prototype.update = function () {
             // update inputs
             this._updateInputs();
+        };
+        Player.prototype.render = function () {
         };
         // PUBLIC METHODS
         Player.prototype.flipSpriteY = function () {
