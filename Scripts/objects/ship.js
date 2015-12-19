@@ -38,9 +38,9 @@ var objects;
             if (this.x == 0 - this.width) {
                 this.kill();
             }
-            if (this.game.physics.arcade.collide(this._player, this)) {
-                console.log("HIT");
-                this._player.body.velocity.x += 500;
+            // ends game if player is hit
+            if (this.game.physics.arcade.overlap(this._player, this)) {
+                this.game.state.start("Over");
             }
         };
         // PRIVATE METHODS +++++++++++++++++++	

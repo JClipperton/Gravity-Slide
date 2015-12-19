@@ -11,7 +11,6 @@ var scenes;
         // CONSTRUCTOR ++++++++++++++++++++++++++
         function Play() {
             _super.call(this);
-            // private _ship: objects.Ship;
             this._level = 2;
             if (this._level >= 3) {
                 this._levelSpeed = 5;
@@ -27,19 +26,16 @@ var scenes;
             // add scrolling background
             this._background1 = new objects.ParallaxBackground(this.game, 0, 'bgBack', 'bgMiddle', 'bgFront', this._levelSpeed);
             this._background2 = new objects.ParallaxBackground(this.game, 480, 'bgBack', 'bgMiddle', 'bgFront', this._levelSpeed);
-            // TODO: remove ---> debug button to game over screen
-            this._gameOverButton = this.game.add.button(750, 550, 'firstaid', this._gameOverButton_Clicked);
-            this._gameOverButton.anchor.setTo(0.5);
             // add player
             this._player = new objects.Player(this.game, 400, 50, 'player', 0.2, 300);
             this.add.existing(this._player);
-            /*
-            // add ship
-            this._ship = new objects.Ship(this.game, this._player, 1200, 300, 200, 'ship', this._levelSpeed);
-            this.add.existing(this._ship);*/
             // add object manager
             this._objectManager = new utilities.ObjectManager(this.game, this._player, this._level, this._levelSpeed);
             this._objectManager.start();
+            // add music
+            this._bgMusic = new Phaser.Sound(this.game, 'music', 0.6, true);
+            this._bgMusic.play();
+            console.log("the music is: " + this._bgMusic.isPlaying);
         };
         Play.prototype.update = function () {
             // scroll background
@@ -63,10 +59,6 @@ var scenes;
                 this._player.body.gravity.y = -this._player.y + 600;
                 this._player.flipSpriteY();
             }
-        };
-        /** DEBUG-TEMP ---> sets game to over state */
-        Play.prototype._gameOverButton_Clicked = function () {
-            this.game.state.start("Over");
         };
         return Play;
     })(Phaser.State);

@@ -17,7 +17,7 @@ var utilities;
         /** Run initial set up for Game Manager Class */
         ObjectManager.prototype.start = function () {
             this._SpawnLevelSection();
-            this.game.time.events.repeat(Phaser.Timer.SECOND * 6, this._numberOfSections, this._SpawnLevelSection, this);
+            this.game.time.events.repeat(Phaser.Timer.SECOND * 7, this._numberOfSections, this._SpawnLevelSection, this);
         };
         /** Update Method for Game Manager Class */
         ObjectManager.prototype.update = function () {

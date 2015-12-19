@@ -14,7 +14,7 @@ module scenes {
 		constructor() {
 			super();
 		}
-		
+
 		create(): void {
 			// play game over sound
 			this._gameOverSound = this.game.add.audio('gameover');
@@ -25,7 +25,7 @@ module scenes {
 			this.add.existing(this._bg);
 			
 			// define text style
-			var style = { font:"65px Ar Destine", fill:"#ffffff", boundsAlignH:"center", boundsAlignV:"middle" };
+			var style = { font: "65px Ar Destine", fill: "#ffffff", boundsAlignH: "center", boundsAlignV: "middle" };
 			
 			// add text
 			this._gameOverText = this.game.add.text(-200, 0, "Game Over", style);
@@ -35,13 +35,15 @@ module scenes {
 			this._gameOverText.setTextBounds(0, 200, 800, 100);
 			
 			// add reset game button
-			this._resetGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'firstaid', this._resetGameButton_Clicked);
+			this._resetGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'firstaid', this._resetGame);
 			this._resetGameButton.anchor.setTo(700, 500);
+
+			this.input.onTap.addOnce(this._resetGame, this);
 		}
 		
 		// PRIVATE METHODS
 		/** DEBUG-TEMP ---> sets game to title state */
-		private _resetGameButton_Clicked():void {
+		private _resetGame(): void {
 			this.game.state.start("Title");
 		}
 	}

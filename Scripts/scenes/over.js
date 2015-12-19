@@ -27,12 +27,13 @@ var scenes;
             // set text bounds
             this._gameOverText.setTextBounds(0, 200, 800, 100);
             // add reset game button
-            this._resetGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'firstaid', this._resetGameButton_Clicked);
+            this._resetGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'firstaid', this._resetGame);
             this._resetGameButton.anchor.setTo(700, 500);
+            this.input.onTap.addOnce(this._resetGame, this);
         };
         // PRIVATE METHODS
         /** DEBUG-TEMP ---> sets game to title state */
-        Over.prototype._resetGameButton_Clicked = function () {
+        Over.prototype._resetGame = function () {
             this.game.state.start("Title");
         };
         return Over;

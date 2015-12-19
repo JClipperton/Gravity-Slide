@@ -40,6 +40,7 @@ var scenes;
             this.game.load.audio('jump', '../Assets/audio/player_jump.wav');
             this.game.load.audio('pickupBlue', '../Assets/audio/pickup_currency.mp3');
             this.game.load.audio('pickupGrey', '../Assets/audio/pickup_shield.mp3');
+            this.game.load.audio('music', '../Assets/audio/NanoFactory_sample.mp3');
         };
         Title.prototype.create = function () {
             this._titleScreenBg = this.game.add.image(0, 0, 'gameSplash1');

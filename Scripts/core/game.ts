@@ -15,8 +15,7 @@ module Game {
         // load all game assets
         public preload(): void {                      
 			this.game.load.image('gameSplash1', '../Assets/images/gameSplash.jpg');
-            this.game.load.image('preload-bar', '../Assets/images/loader.png');  
-            this.game.load.image('phaserLogo', '../Assets/images/Phaser-Logo-Small.png');  
+            this.game.load.image('preload-bar', '../Assets/images/loader.png');
         }
 
         public create(): void {

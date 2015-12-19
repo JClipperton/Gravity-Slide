@@ -1,5 +1,8 @@
 module objects {
 	export class Ship extends Phaser.Sprite {
+		// PUBLIC INSTANCE VARIABLES
+		public game: Phaser.Game;
+		
 		// PRIVATE INSTANCE VARIABLES
 		private _player: objects.Player;		
 		private _speed: number;
@@ -47,14 +50,9 @@ module objects {
 				this.kill();					
 			}
 			
-			if (this.game.physics.arcade.collide(this._player, this)) {
-				console.log("HIT");
-				
-				this._player.body.velocity.x += 500;
-				//this._player.body.velocity.y -= 20;
-				//this._player.body.enableBody = false;
-				//this._player.body.collideWorldBounds = false;
-				//this._player.body.allowGravity = false;
+			// ends game if player is hit
+			if (this.game.physics.arcade.overlap(this._player, this)) {
+				this.game.state.start("Over");
 				
 			}
 						

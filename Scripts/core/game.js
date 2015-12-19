@@ -13,7 +13,6 @@ var Game;
         GravitySlide.prototype.preload = function () {
             this.game.load.image('gameSplash1', '../Assets/images/gameSplash.jpg');
             this.game.load.image('preload-bar', '../Assets/images/loader.png');
-            this.game.load.image('phaserLogo', '../Assets/images/Phaser-Logo-Small.png');
         };
         GravitySlide.prototype.create = function () {
             // game settings
